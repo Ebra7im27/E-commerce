@@ -3,8 +3,26 @@ import { Footer, Navbar } from "../../Components";
 import "./Cart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, delCart } from "../../Redux/Action";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cart() {
+    const storedUserInfo = localStorage.getItem("UserInfo")
+
+    const handlePayment = () => {
+        if (storedUserInfo) {
+            toast.success("Payment successful! Your order is being processed.")
+            setTimeout(() => {
+                window.location = '/checkout'
+            }, 3500)
+        } else {
+            toast.warning("You must log in first to proceed to checkout.")
+            setTimeout(() => {
+                window.location = '/login'
+            }, 3500)
+        }
+    }
+
     const EmptyCart = () => {
         return (
             <div className="container">
@@ -28,26 +46,25 @@ function Cart() {
         )
     }
 
-    const state = useSelector((state) => state.handleCart)
-    const dispatch = useDispatch()
+    const state = useSelector((state) => state.handleCart);
+    const dispatch = useDispatch();
 
     const addItem = (product) => {
-        dispatch(addCart(product))
+        dispatch(addCart(product));
     }
     const removeItem = (product) => {
-        dispatch(delCart(product))
+        dispatch(delCart(product));
     }
 
     const ShowCart = () => {
-        let totalProducts = 0
-        let delivery = 30.0
-        let totalItems = 0
-        state.map((item) => {
-            return (totalProducts += item.price * item.qty)
-        })
-        state.map((item) => {
-            return (totalItems += item.qty)
-        })
+        let totalProducts = 0;
+        let delivery = 30.0;
+        let totalItems = 0;
+
+        state.forEach((item) => {
+            totalProducts += item.price * item.qty;
+            totalItems += item.qty;
+        });
 
         return (
             <>
@@ -141,12 +158,12 @@ function Cart() {
                                             </li>
                                         </ul>
 
-                                        <Link
-                                            to="/checkout"
+                                        <button
                                             className="btn btn-dark btn-lg btn-block mt-3 shadow-sm"
+                                            onClick={handlePayment}
                                         >
                                             Go to checkout
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -166,8 +183,9 @@ function Cart() {
                 {state.length > 0 ? <ShowCart /> : <EmptyCart />}
             </div>
             <Footer />
+            <ToastContainer autoClose={3000} />
         </>
     )
 }
 
-export default Cart
+export default Cart;
