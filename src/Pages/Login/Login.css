@@ -1,0 +1,48 @@
+.secLogin {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    color: #333;
+    margin: 20px auto;
+}
+
+.secLogin h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2575fc;
+}
+
+.secLogin .form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.secLogin .btnLog {
+    background: #2575fc;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.secLogin .btnLog:hover {
+    background: #6a11cb;
+}
+
+.secLogin .text-center a {
+    color: #2575fc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.secLogin .text-center a:hover {
+    color: #6a11cb;
+}
