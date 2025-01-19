@@ -1,25 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Footer, Navbar } from "../../Components";
 import "./Checkout.css";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Checkout() {
-    const navigate = useNavigate()
-    const storedUserInfo = localStorage.getItem("UserInfo")
-
-    const handlePayment = () => {
-        if (storedUserInfo) {
-            toast.success("Payment successful! Your order is being processed.")
-        } else {
-            toast.warning("You must log in first to proceed to checkout.")
-            setTimeout(() => {
-                navigate("/login")
-            }, 5000)
-        }
-    };
-
     const EmptyCheckout = () => {
         return (
             <div className="container mt-5">
@@ -318,7 +302,6 @@ function Checkout() {
                                     <button
                                         className="w-100 btn btn-primary btn-lg checkout-button"
                                         type="submit"
-                                        onClick={handlePayment}
                                     >
                                         Continue to checkout
                                     </button>
@@ -370,7 +353,6 @@ function Checkout() {
                 {state.length ? <ShowCheckout /> : <EmptyCheckout />}
             </div>
             <Footer />
-            <ToastContainer />
         </>
     )
 }
